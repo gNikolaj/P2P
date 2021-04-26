@@ -91,14 +91,15 @@
                 NameSurferEntry currentEntry = list.get(i);
                 for (int j = 0; j < NDECADES; j++) {
                     int rank = currentEntry.getRank(j);
-                    double x1Position = stepX * j;
-                    double y1Position = GRAPH_MARGIN_SIZE + rank * changeY;
+
                     if (rank == 0) rank = MAX_RANK;
 
                     /** Make this condition cause I use previous param(j-1)*/
                     if (j != 0) {
                         int previousRank = currentEntry.getRank(j-1);
                         if (previousRank == 0) previousRank = MAX_RANK;
+                        double x1Position = stepX * j;
+                        double y1Position = GRAPH_MARGIN_SIZE + rank * changeY;
                         double x0Position = stepX * (j-1);
                         double y0Position = GRAPH_MARGIN_SIZE + previousRank * changeY;
 
@@ -111,7 +112,7 @@
                     if (rank == MAX_RANK) result = currentEntry.getName() + " *";
 
                     GLabel nameAndRank = addLabel(result, i);
-                    add(nameAndRank, x1Position, y1Position);
+                    add(nameAndRank, stepX * j, GRAPH_MARGIN_SIZE + rank * changeY);
                 }
             }
         }
